@@ -19,21 +19,20 @@ use URI;
 use URI::file;
 use namespace::clean;
 
-class_type 'AbsoluteUri',
-	{ class => 'URI' };
-
-class_type 'PathClassFile',
-	{ class => 'Path::Class::File' };
+class_type PathClassFile => { class => 'Path::Class::File' };
+class_type AbsoluteUri   => { class => 'URI' };
 
 coerce 'AbsoluteUri',
-	from 'Str', via {
+	from Str => via {
 		if    (/^std(in|out):$/i) { URI->new(lc $_) }
 		elsif (/^\w\w+:/i)        { URI->new($_) }
 		else                      { URI::file->new_abs($_) }
 	};
 
 coerce 'AbsoluteUri',
-	from 'PathClassFile', via { URI::file->new_abs("$_") };
+	from PathClassFile => via {
+		URI::file->new_abs("$_")
+	};
 
 has uri => (
 	is         => 'ro',
