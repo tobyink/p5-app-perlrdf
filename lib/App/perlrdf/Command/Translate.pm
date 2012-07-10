@@ -84,27 +84,31 @@ sub execute
 	
 	my ($self, $opt, $arg) = @_;
 	
-	my @inputs =
-		   $self->get_filespecs(
-				'App::perlrdf::FileSpec::InputRDF',
-				input => $opt,
-			)
-		|| App::perlrdf::FileSpec::InputRDF->new_from_filespec(
-				(shift(@$arg) // '-'),
-				$opt->{input_format},
-				$opt->{input_base},
-			);
-		
-	my @outputs =
-		   $self->get_filespecs(
-				'App::perlrdf::FileSpec::OutputRDF',
-				output => $opt,
-			)
-		|| App::perlrdf::FileSpec::OutputRDF->new_from_filespec(
-				(shift(@$arg) // '-'),
-				$opt->{output_format},
-				undef,
-			);
+	my @inputs = $self->get_filespecs(
+		'App::perlrdf::FileSpec::InputRDF',
+		input => $opt,
+	);
+	
+	@inputs = App::perlrdf::FileSpec::InputRDF->new_from_filespec(
+		(shift(@$arg) // '-'),
+		$opt->{input_format},
+		$opt->{input_base},
+	) unless @inputs;
+
+	my @outputs = $self->get_filespecs(
+		'App::perlrdf::FileSpec::OutputRDF',
+		output => $opt,
+	);
+	
+	@outputs = App::perlrdf::FileSpec::OutputRDF->new_from_filespec(
+		(shift(@$arg) // '-'),
+		$opt->{output_format},
+		undef,
+	) unless @outputs;
+	
+	use Data::Dumper;
+	print Dumper($opt, \@inputs, \@outputs);
+	exit;
 	
 	my $model = RDF::Trine::Model->new;
 	$_->parse_into_model($model) for @inputs;	

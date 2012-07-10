@@ -19,17 +19,24 @@ sub get_filespecs
 	my @specs = map {
 		$class->new_from_filespec(
 			$_,
-			$opt->{"$name\-format"},
-			$opt->{"$name\-base"},
+			$opt->{$name.'_format'},
+			$opt->{$name.'_base'},
 		)
-	} @{ $opt->{"$name\-spec"} || [] };
+	} do {
+		if (ref $opt->{$name.'_spec'} eq 'ARRAY')
+			{ @{$opt->{$name.'_spec'}} }
+		elsif (defined $opt->{$name.'_spec'})
+			{ ($opt->{$name.'_spec'}) }
+		else
+			{ qw() }
+	};
 	
 	if (defined $opt->{$name} and length $opt->{$name})
 	{
 		push @specs, $class->new_from_filespec(
 			'{}'.$opt->{$name},
-			$opt->{"$name\-format"},
-			$opt->{"$name\-base"},
+			$opt->{$name.'_format'},
+			$opt->{$name.'_base'},
 		)
 	}
 	
