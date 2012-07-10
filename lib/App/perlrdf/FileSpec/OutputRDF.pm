@@ -1,0 +1,57 @@
+package App::perlrdf::FileSpec::OutputRDF;
+
+use 5.010;
+use autodie;
+use strict;
+use warnings;
+use utf8;
+
+BEGIN {
+	$App::perlrdf::FileSpec::OutputRDF::AUTHORITY = 'cpan:TOBYINK';
+	$App::perlrdf::FileSpec::OutputRDF::VERSION   = '0.001';
+}
+
+use Any::Moose;
+use namespace::clean;
+
+extends 'App::perlrdf::FileSpec::OutputFile';
+
+has serializer => (
+	is         => 'ro',
+	isa        => 'Object|Undef',
+	lazy_build => 1,
+);
+
+sub _build_serializer
+{
+	my $self = shift;
+	my $P = 'RDF::Trine::Serializer';
+	
+	if (blessed $self->format and $self->format->isa($P))
+	{
+		return $self->format;
+	}
+	
+	if ($self->format =~ m{/})
+	{
+		my (undef, $s) = $P->negotiate(
+			request_headers => HTTP::Headers->new(
+				Accept => $self->format,
+			),
+		);
+		return $s;
+	}
+
+	if ($self->format =~ m{::})
+	{
+		(my $class = $self->format)
+			=~ s/::Parser/::Serializer/;
+		$class = 'RDF::Trine::Serializer::Turtle'
+			if $class eq 'RDF::TrineX::Serializer::Pretdsl';
+		return $class->new;
+	}
+	
+	return $P->new($self->format);
+}
+
+1;

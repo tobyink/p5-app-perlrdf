@@ -14,11 +14,10 @@ use App::Cmd::Setup -command;
 
 sub get_filespecs
 {
-	require App::perlrdf::FileSpec;
-	my ($self, $name, $opt) = @_;
+	my ($self, $class, $name, $opt) = @_;
 	
 	my @specs = map {
-		App::perlrdf::FileSpec->new_from_filespec(
+		$class->new_from_filespec(
 			$_,
 			$opt->{"$name\-format"},
 			$opt->{"$name\-base"},
@@ -27,7 +26,7 @@ sub get_filespecs
 	
 	if (defined $opt->{$name} and length $opt->{$name})
 	{
-		push @specs, App::perlrdf::FileSpec->new_from_filespec(
+		push @specs, $class->new_from_filespec(
 			'{}'.$opt->{$name},
 			$opt->{"$name\-format"},
 			$opt->{"$name\-base"},

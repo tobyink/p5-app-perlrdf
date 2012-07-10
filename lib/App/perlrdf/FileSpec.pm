@@ -61,41 +61,7 @@ has 'format' => (
 	lazy_build => 1,
 );
 
-has response => (
-	is         => 'ro',
-	isa        => 'HTTP::Response',
-	lazy_build => 1,
-);
-
-has content => (
-	is         => 'ro',
-	isa        => 'Str',
-	lazy_build => 1,
-);
-
-has output_handle => (
-	is         => 'ro',
-	isa        => 'Any',
-	lazy_build => 1,
-);
-
-has input_handle => (
-	is         => 'ro',
-	isa        => 'Any',
-	lazy_build => 1,
-);
-
-has parser => (
-	is         => 'ro',
-	isa        => 'Object|Undef',
-	lazy_build => 1,
-);
-
-has serializer => (
-	is         => 'ro',
-	isa        => 'Object|Undef',
-	lazy_build => 1,
-);
+sub DEFAULT_STREAM { confess "DEFAULT_STREAM is undefined" };
 
 sub _jsonish
 {
@@ -116,7 +82,7 @@ sub _jsonish
 
 sub new_from_filespec
 {
-	my ($class, $spec, $default_format, $default_base, $default_stream) = @_;
+	my ($class, $spec, $default_format, $default_base) = @_;
 	
 	my ($optstr, $name) = ($spec =~ m<^ (\{ .*? \}) (.+) $>x)
 		? ($1, $2)
@@ -124,7 +90,7 @@ sub new_from_filespec
 	my $opts = $class->_jsonish($optstr);
 
 	$class->new(
-		'uri'          => ($name eq '-' ? $default_stream : $name),
+		'uri'          => ($name eq '-' ? $class->DEFAULT_STREAM : $name),
 		maybe('format' => ($opts->{format} // $default_format)),
 		maybe('base'   => ($opts->{base}   // $default_base)),
 	);
@@ -148,144 +114,23 @@ sub _build_format
 			-> guess_parser_by_filename($self->uri->file);
 	}
 	
-	if ($self->response->content_type)
+	if ($self->can('response'))
 	{
-		return $self->response->content_type;
+		return $self->response->content_type
+			if $self->response->content_type;
+		
+		return 'RDF::TrineX::Parser::Pretdsl'
+			if (($self->response->base // $self->uri) =~ /\.(pret|pretdsl)/i);
+			
+		return RDF::Trine::Parser->guess_parser_by_filename(
+			$self->response->base // $self->uri,
+		);
 	}
 
 	return 'RDF::TrineX::Parser::Pretdsl'
-		if(($self->response->base // $self->uri) =~ /\.(pret|pretdsl)/i);
+		if $self->uri =~ /\.(pret|pretdsl)/i;
 
-	return RDF::Trine::Parser
-		-> guess_parser_by_filename($self->response->base // $self->uri);
-}
-
-sub _build_response
-{
-	LWP::UserAgent->new->get( shift->uri );
-}
-
-sub _build_content
-{
-	my $self = shift;
-	
-	if (lc $self->uri->scheme eq 'file')
-	{
-		return scalar Path::Class::File
-			-> new($self->uri->file)
-			-> slurp
-	}
-	elsif (lc $self->uri->scheme eq 'stdin')
-	{
-		local $/ = <STDIN>;
-		return $/;
-	}
-	else
-	{
-		return $self->response->decoded_content;
-	}
-}
-
-sub _build_input_handle
-{
-	my $self = shift;
-	
-	if (lc $self->uri->scheme eq 'file')
-	{
-		return Path::Class::File
-			-> new($self->uri->file)
-			-> open
-	}
-	elsif (lc $self->uri->scheme eq 'stdin')
-	{
-		return \*STDIN;
-	}
-	else
-	{
-		my $data = $self->content;
-		open my $fh, '<', \$data;
-		return $fh;
-	}
-}
-
-sub _build_output_handle
-{
-	my $self = shift;
-	
-	if (lc $self->uri->scheme eq 'file')
-	{
-		return Path::Class::File
-			-> new($self->uri->file)
-			-> openw
-	}
-	elsif (lc $self->uri->scheme eq 'stdout')
-	{
-		return \*STDOUT;
-	}
-	elsif (lc $self->uri->scheme eq 'stderr')
-	{
-		return \*STDERR;
-	}
-	else
-	{
-		die "TODO";
-	}
-}
-
-sub _build_parser
-{
-	my $self = shift;
-	my $P = 'RDF::Trine::Parser';
-	
-	if (blessed $self->format and $self->format->isa($P))
-	{
-		return $self->format;
-	}
-	
-	if ($self->format =~ m{/})
-	{
-		return $P->parser_by_media_type($self->format)->new;
-	}
-
-	if ($self->format =~ m{::})
-	{
-		return $self->format->new;
-	}
-
-	if ($self->format =~ m{(pret|pretdsl)}i)
-	{
-		return RDF::TrineX::Parser::Pretdsl->new;
-	}
-
-	return $P->new($self->format);
-}
-
-sub _build_serializer
-{
-	my $self = shift;
-	my $P = 'RDF::Trine::Serializer';
-	
-	if (blessed $self->format and $self->format->isa($P))
-	{
-		return $self->format;
-	}
-	
-	if ($self->format =~ m{/})
-	{
-		my (undef, $s) = $P->negotiate(
-			request_headers => HTTP::Headers->new(
-				Accept => $self->format,
-			),
-		);
-		return $s;
-	}
-
-	if ($self->format =~ m{::})
-	{
-		return $self->format->new;
-	}
-	
-	return $P->new($self->format);
+	return RDF::Trine::Parser->guess_parser_by_filename($self->uri);
 }
 
 1;

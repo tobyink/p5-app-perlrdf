@@ -75,31 +75,38 @@ use constant opt_spec     => (
 
 sub execute
 {
+	require App::perlrdf::FileSpec::InputRDF;
+	require App::perlrdf::FileSpec::OutputRDF;
+	
 	my ($self, $opt, $arg) = @_;
 	
 	my @inputs =
-		   $self->get_filespecs(input => $opt)
-		|| App::perlrdf::FileSpec->new_from_filespec(
+		   $self->get_filespecs(
+				'App::perlrdf::FileSpec::InputRDF',
+				input => $opt,
+			)
+		|| App::perlrdf::FileSpec::InputRDF->new_from_filespec(
 				(shift(@$arg) // '-'),
 				$opt->{input_format},
 				$opt->{input_base},
-				'stdin:',
 			);
 		
 	my @outputs =
-		   $self->get_filespecs(output => $opt)
-		|| App::perlrdf::FileSpec->new_from_filespec(
+		   $self->get_filespecs(
+				'App::perlrdf::FileSpec::OutputRDF',
+				output => $opt,
+			)
+		|| App::perlrdf::FileSpec::OutputRDF->new_from_filespec(
 				(shift(@$arg) // '-'),
 				$opt->{output_format},
 				undef,
-				'stdout:',
 			);
 	
 	my $model = RDF::Trine::Model->new;
 	foreach (@inputs)
 	{
 		rdf_parse(
-			$_->input_handle,
+			$_->handle,
 			as   => $_->parser,
 			base => $_->base,
 			into => $model,
@@ -113,7 +120,7 @@ sub execute
 		rdf_serialize(
 			$model,
 			as   => $_->serializer,
-			to   => $_->output_handle,
+			to   => $_->handle,
 		);
 	}
 	
