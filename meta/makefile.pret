@@ -12,6 +12,7 @@
 	requires          p`namespace::clean`;
 	requires          p`Path::Class`;
 	requires          p`PerlX::Maybe`;
+	requires          p`RDF::NS`;
 	requires          p`RDF::TriN3`;
 	requires          p`RDF::Trine`;
 	requires          p`RDF::TrineX::Functions`;
