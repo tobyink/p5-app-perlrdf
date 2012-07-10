@@ -12,6 +12,8 @@ BEGIN {
 }
 
 use Any::Moose;
+use RDF::TrineX::Functions -all => { -prefix => 'rdf_' };
+
 use namespace::clean;
 
 extends 'App::perlrdf::FileSpec::InputFile';
@@ -48,6 +50,18 @@ sub _build_parser
 	}
 
 	return $P->new($self->format);
+}
+
+sub parse_into_model
+{
+	my ($self, $model) = @_;
+
+	rdf_parse(
+		$self->handle,
+		as   => $self->parser,
+		base => $self->base,
+		into => $model,
+	)
 }
 
 1;

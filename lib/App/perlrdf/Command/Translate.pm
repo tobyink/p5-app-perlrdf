@@ -11,11 +11,12 @@ BEGIN {
 }
 
 use App::perlrdf -command;
-use Data::UUID;
-use RDF::TrineX::Functions -all => { -prefix => 'rdf_' };
 
 sub skolem ($)
 {
+	require Data::UUID;
+	require RDF::Trine;
+	
 	my $model = shift;
 	my %map;
 	my $uuid = Data::UUID->new;
@@ -31,7 +32,9 @@ sub skolem ($)
 					if ($_->is_blank)
 					{
 						$map{ $_->blank_identifier }
-						||=rdf_iri(sprintf 'urn:uuid:%s', lc $uuid->create_str)
+						||= RDF::Trine::Node::Resource->new(
+							sprintf 'urn:uuid:%s', lc $uuid->create_str
+						)
 					}
 					else
 					{
@@ -77,6 +80,7 @@ sub execute
 {
 	require App::perlrdf::FileSpec::InputRDF;
 	require App::perlrdf::FileSpec::OutputRDF;
+	require RDF::Trine;
 	
 	my ($self, $opt, $arg) = @_;
 	
@@ -103,27 +107,9 @@ sub execute
 			);
 	
 	my $model = RDF::Trine::Model->new;
-	foreach (@inputs)
-	{
-		rdf_parse(
-			$_->handle,
-			as   => $_->parser,
-			base => $_->base,
-			into => $model,
-		);
-	}
-	
+	$_->parse_into_model($model) for @inputs;	
 	skolem $model if $opt->{skolem};
-	
-	foreach (@outputs)
-	{
-		rdf_serialize(
-			$model,
-			as   => $_->serializer,
-			to   => $_->handle,
-		);
-	}
-	
+	$_->serialize_model($model) for @outputs;
 	0;
 }
 

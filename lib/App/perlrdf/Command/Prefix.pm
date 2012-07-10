@@ -26,8 +26,9 @@ use constant opt_spec     => (
 
 sub execute
 {
-	my ($self, $opt, $arg) = @_;
 	require RDF::NS;
+	
+	my ($self, $opt, $arg) = @_;
 	
 	my $method;
 	given ($opt->{format} // '')

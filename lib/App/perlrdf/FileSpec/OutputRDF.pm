@@ -12,6 +12,8 @@ BEGIN {
 }
 
 use Any::Moose;
+use RDF::TrineX::Functions -all => { -prefix => 'rdf_' };
+
 use namespace::clean;
 
 extends 'App::perlrdf::FileSpec::OutputFile';
@@ -52,6 +54,17 @@ sub _build_serializer
 	}
 	
 	return $P->new($self->format);
+}
+
+sub serialize_model
+{
+	my ($self, $model) = @_;
+	
+	rdf_serialize(
+		$model,
+		as   => $self->serializer,
+		to   => $self->handle,
+	)
 }
 
 1;
