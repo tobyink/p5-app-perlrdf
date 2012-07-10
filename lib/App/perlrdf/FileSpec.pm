@@ -14,6 +14,7 @@ BEGIN {
 use Any::Moose;
 use Any::Moose '::Util::TypeConstraints';
 use IO::Scalar;
+use JSON;
 use LWP::UserAgent;
 use Path::Class;
 use PerlX::Maybe;
@@ -34,7 +35,7 @@ class_type 'PathClassFile',
 coerce 'AbsoluteUri',
 	from 'Str', via {
 		if    (/^std(in|out):$/i) { URI->new(lc $_) }
-		elsif (/^\w+:/i)          { URI->new($_) }
+		elsif (/^\w\w+:/i)        { URI->new($_) }
 		else                      { URI::file->new_abs($_) }
 	};
 
@@ -61,7 +62,11 @@ has 'format' => (
 	lazy_build => 1,
 );
 
-sub DEFAULT_STREAM { confess "DEFAULT_STREAM is undefined" };
+sub DEFAULT_STREAM
+{
+	warn "DEFAULT_STREAM is 'stdout:'\n";
+	return "stdout:";
+}
 
 sub _jsonish
 {
@@ -131,6 +136,19 @@ sub _build_format
 		if $self->uri =~ /\.(pret|pretdsl)/i;
 
 	return RDF::Trine::Parser->guess_parser_by_filename($self->uri);
+}
+
+sub TO_JSON
+{
+	my ($self, $stringify) = @_;
+	my $r = +{
+		base    => $self->base->as_string,
+		format  => $self->format,
+		uri     => $self->uri->as_string,
+	};
+	return $stringify
+		? to_json($r => +{ pretty => 1, canonical => 1 })
+		: $r;
 }
 
 1;
