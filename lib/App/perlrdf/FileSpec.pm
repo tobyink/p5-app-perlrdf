@@ -13,17 +13,10 @@ BEGIN {
 
 use Any::Moose;
 use Any::Moose '::Util::TypeConstraints';
-use IO::Scalar;
 use JSON;
-use LWP::UserAgent;
-use Path::Class;
 use PerlX::Maybe;
-use RDF::Trine;
-use RDF::TriN3;
-use RDF::TrineX::Parser::Pretdsl;
 use URI;
 use URI::file;
-
 use namespace::clean;
 
 class_type 'AbsoluteUri',

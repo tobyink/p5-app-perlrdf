@@ -12,6 +12,10 @@ BEGIN {
 }
 
 use Any::Moose;
+use RDF::Trine;
+use RDF::TriN3;
+use RDF::TrineX::Parser::Pretdsl;
+use RDF::TrineX::Parser::RDFa;
 use RDF::TrineX::Functions -all => { -prefix => 'rdf_' };
 
 use namespace::clean;

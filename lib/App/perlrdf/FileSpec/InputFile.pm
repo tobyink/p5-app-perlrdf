@@ -12,6 +12,8 @@ BEGIN {
 }
 
 use Any::Moose;
+use IO::Scalar;
+use Path::Class;
 use namespace::clean;
 
 extends 'App::perlrdf::FileSpec';

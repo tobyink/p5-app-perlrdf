@@ -12,6 +12,8 @@ BEGIN {
 }
 
 use Any::Moose;
+use RDF::Trine;
+use RDF::TriN3;
 use RDF::TrineX::Functions -all => { -prefix => 'rdf_' };
 
 use namespace::clean;
