@@ -106,10 +106,6 @@ sub execute
 		undef,
 	) unless @outputs;
 	
-	use Data::Dumper;
-	print Dumper($opt, \@inputs, \@outputs);
-	exit;
-	
 	my $model = RDF::Trine::Model->new;
 	$_->parse_into_model($model) for @inputs;	
 	skolem $model if $opt->{skolem};
