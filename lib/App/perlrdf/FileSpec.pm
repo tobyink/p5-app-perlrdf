@@ -14,6 +14,7 @@ BEGIN {
 use Any::Moose;
 use Any::Moose '::Util::TypeConstraints';
 use JSON;
+use Object::AUTHORITY;
 use PerlX::Maybe;
 use URI;
 use URI::file;

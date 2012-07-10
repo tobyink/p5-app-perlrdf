@@ -11,6 +11,7 @@ BEGIN {
 }
 
 use App::Cmd::Setup -command;
+use Object::AUTHORITY;
 
 sub get_filespecs
 {

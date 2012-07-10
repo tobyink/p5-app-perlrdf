@@ -11,6 +11,7 @@ BEGIN {
 }
 
 use App::Cmd::Setup -app;
+use Object::AUTHORITY;
 
 1;
 
