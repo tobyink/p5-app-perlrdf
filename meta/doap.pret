@@ -1,0 +1,22 @@
+# This file contains general metadata about the project.
+
+@prefix : <http://usefulinc.com/ns/doap#>.
+
+`App-perlrdf`
+	:programming-language "Perl" ;
+	:shortdesc            "perlrdf command line utils";
+	:homepage             <https://metacpan.org/release/App-perlrdf>;
+	:download-page        <https://metacpan.org/release/App-perlrdf>;
+	:bug-database         <http://rt.cpan.org/Dist/Display.html?Queue=App-perlrdf>;
+	:created              2012-07-08;
+	:license              <http://dev.perl.org/licenses/>;
+	:maintainer           cpan:TOBYINK;
+	:developer            cpan:TOBYINK.
+
+<http://dev.perl.org/licenses/>
+	dc:title  "the same terms as the perl 5 programming language system itself".
+
+cpan:TOBYINK
+	foaf:name  "Toby Inkster";
+	foaf:mbox  <mailto:tobyink@cpan.org>.
+

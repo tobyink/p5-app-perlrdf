@@ -1,0 +1,21 @@
+# This file provides instructions for packaging.
+
+`App-perlrdf`
+	perl_version_from m`App::perlrdf`;
+	version_from      m`App::perlrdf`;
+	readme_from       m`App::perlrdf`;
+	test_requires     p`Test::More 0.61`;
+	requires          p`Any::Moose`;
+	requires          p`App::Cmd`;
+	requires          p`Data::UUID`;
+	requires          p`LWP::UserAgent`;
+	requires          p`namespace::clean`;
+	requires          p`Path::Class`;
+	requires          p`PerlX::Maybe`;
+	requires          p`RDF::TriN3`;
+	requires          p`RDF::Trine`;
+	requires          p`RDF::TrineX::Functions`;
+	requires          p`RDF::TrineX::Parser::Pretdsl`;
+	requires          p`URI`;
+	requires          p`URI::file`;
+	.
