@@ -58,12 +58,20 @@ sub execute
 			$_,
 			$opt->{input_format},
 			$opt->{input_base},
-		);
+		)
 	} @$arg;
-	
+
+	push @inputs,
+		App::perlrdf::FileSpec::InputRDF->new_from_filespec(
+			'-',
+			$opt->{input_format},
+			$opt->{input_base},
+		)
+		unless @inputs;
+
 	for (@inputs)
 	{
-		printf "Loading %s\n", $_->uri;
+		printf STDERR "Loading %s\n", $_->uri;
 		
 		my %params = ();
 		if ($opt->{autograph})
