@@ -26,8 +26,100 @@ perlrdf - perlrdf command line utils
 
 	$ perlrdf translate output.nq output.rdf
 
+	$ perlrdf isomorphic input.rdf output.rdf
+	graphs are isomorphic
+
 =head1 DESCRIPTION
+
+perlrdf is a single front-end to various RDF functionality available for
+Perl. The core distribution includes commands for create and manipulate
+quad stores (i.e. databases for RDF data); and commands to parse, serialise,
+convert and validate RDF data in various formats.
+
+However, perlrdf is pluggable and it is antipated that plugins on CPAN
+will cover other tasks such as RDF querying, signing, encryption, and
+reasoning.
+
 =head1 COMMANDS
+
+This section describes the commands included with the core App::perlrdf
+distribution. Others are available as plugins. Run C<< perlrdf commands >>
+to see a list of locally installed commands.
+
+=head2 Meta Commands
+
+=head3 C<< perlrdf about >>
+
+Shows the version numbers of all installed perlrdf commands, plus the CPAN
+ID of each command's author.
+
+=head3 C<< perlrdf aliases >>
+
+Many commands have aliases or shortcuts. For example, the following two are
+equivalent:
+
+	perlrdf translate input.ttl output.rdf
+	perlrdf tr input.ttl output.rdf
+
+C<< perlrdf aliases >> shows a list of available aliases.
+
+=head3 C<< perlrdf commands >>
+
+Shows a list of installed perlrdf commands, along with a brief extract.
+
+=head3 C<< perlrdf filespec >>
+
+Shows help on "File Specifications". FileSpecs are an App::perlrdf-specific
+microsyntax for specifying a filename or URI along with a tiny bit of
+associated key-value metadata. The following are three examples of FileSpecs:
+
+	{format:RDFXML}C:\Data\contacts.xml
+	http://www.example.com/mydata.ttl
+	{format:Turtle,base:"http://example.net/"}stdin:
+
+Running the C<< perlrdf filespec >> command on its own shows some help on
+using FileSpecs. If you run it with additional arguments, these are parsed
+as FileSpecs with debugging information shown.
+
+	$ perlrdf filespec /tmp/foo.rdf
+	{
+		"base" : "file:///tmp/foo.rdf",
+		"format" : "RDF::Trine::Parser::RDFXML",
+		"uri" : "file:///tmp/foo.rdf"
+	}
+
+=head3 C<< perlrdf help >>
+
+Running the C<< perlrdf help >> command on its own shows a list of commands
+with their abstracts. Detailed help for a particular command can be shown
+by providing that as an argument. For example, for help on the
+C<< perlrdf translate >> command, run:
+
+	$perlrdf help translate
+
+=head2 Parsing and Serialization
+
+=head3 C<< perlrdf canonicalize >>
+
+=head3 C<< perlrdf translate >>
+
+=head3 C<< perlrdf validate >>
+
+=head2 Quad Store Management
+
+=head3 C<< perlrdf make_store >>
+
+=head3 C<< perlrdf store_dump >>
+
+=head3 C<< perlrdf store_load >>
+
+=head3 C<< perlrdf store_truncate >>
+
+=head2 Other
+
+=head3 C<< perlrdf isomorphic >>
+
+=head3 C<< perlrdf prefix >>
 
 =head1 SEE ALSO
 
