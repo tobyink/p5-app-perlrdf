@@ -15,7 +15,7 @@
 	requires          p`RDF::NS`;
 	requires          p`RDF::TriN3`;
 	requires          p`RDF::Trine`;
-	requires          p`RDF::TrineX::Functions`;
+	requires          p`RDF::TrineX::Functions 0.004`;
 	requires          p`RDF::TrineX::Parser::Pretdsl`;
 	requires          p`URI`;
 	requires          p`URI::file`;
