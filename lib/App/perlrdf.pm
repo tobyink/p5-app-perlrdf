@@ -10,7 +10,9 @@ BEGIN {
 	$App::perlrdf::VERSION   = '0.001';
 }
 
-use App::Cmd::Setup -app;
+use App::Cmd::Setup -app => {
+	plugins => [qw( Prompt )],
+};
 use Object::AUTHORITY;
 
 1;

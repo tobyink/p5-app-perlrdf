@@ -7,6 +7,7 @@
 	test_requires     p`Test::More 0.61`;
 	requires          p`Any::Moose`;
 	requires          p`App::Cmd`;
+	requires          p`App::Cmd::Plugin::Prompt`;
 	requires          p`Data::UUID`;
 	requires          p`LWP::UserAgent`;
 	requires          p`namespace::clean`;
@@ -17,6 +18,7 @@
 	requires          p`RDF::Trine`;
 	requires          p`RDF::TrineX::Functions 0.004`;
 	requires          p`RDF::TrineX::Parser::Pretdsl`;
+	requires          p`RDF::TrineX::Parser::RDFa`;
 	requires          p`URI`;
 	requires          p`URI::file`;
 	.
