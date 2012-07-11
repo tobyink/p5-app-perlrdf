@@ -62,9 +62,9 @@ sub parse_into_model
 
 	rdf_parse(
 		$self->handle,
-		as   => $self->parser,
-		base => $self->base,
-		into => $model,
+		base  => $self->base,
+		using => $self->parser,
+		into  => $model,
 		%args,
 	)
 }
