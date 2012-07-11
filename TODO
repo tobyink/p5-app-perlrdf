@@ -1,9 +1,6 @@
 Need some documentation!
 
 More commands...
-- make store
-- load store
-- dump store
 - truncate store (per-graph delete)
 - validate
 
