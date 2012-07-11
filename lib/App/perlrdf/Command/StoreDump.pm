@@ -29,6 +29,8 @@ use constant opt_spec => (
 	[ 'output|o=s@',       'Output filename or URL' ],
 	[ 'output-spec|O=s@',  'Output file specification (default: NQuads)' ],
 	[ 'output-format|s=s', 'Output format (mnemonic: serialise)' ],
+	[]=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>,
+	[ 'graph|g=s@',        'Graph(s) to dump (default: all graphs)' ],
 );
 
 sub execute
@@ -42,6 +44,17 @@ sub execute
 
 	my $store = $self->get_store($opt);
 	my $model = RDF::Trine::Model->new($store);
+
+	if ($opt->{graph})
+	{
+		my $orig = $model;
+		$model   = RDF::Trine::Model->new;
+		for (@{ $opt->{graph} })
+		{
+			my $graph = RDF::Trine::Node::Resource->new($_);
+			$model->add_iterator( scalar $orig->get_statements((undef)x3, $graph) );
+		}
+	}
 
 	my @outputs = $self->get_filespecs(
 		'App::perlrdf::FileSpec::OutputRDF',

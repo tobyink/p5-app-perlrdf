@@ -25,7 +25,7 @@ sub execute
 	my ($self, $opt, $arg) = @_;
 	my $store = $self->get_store($opt);
 	$store->init;
-	printf STDERR "Initialized %s", ref $store;
+	printf STDERR "Initialized %s\n", ref $store;
 }
 
 1;
