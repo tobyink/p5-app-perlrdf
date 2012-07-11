@@ -23,8 +23,9 @@ use constant opt_spec => ( __PACKAGE__->store_opt_spec );
 sub execute
 {
 	my ($self, $opt, $arg) = @_;
-	$self->get_store($opt)->init;
-	say "done";
+	my $store = $self->get_store($opt);
+	$store->init;
+	printf STDERR "Initialized %s", ref $store;
 }
 
 1;
