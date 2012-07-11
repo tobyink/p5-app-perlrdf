@@ -1,0 +1,24 @@
+Need some documentation!
+
+More commands...
+- make store
+- load store
+- dump store
+- truncate store (per-graph delete)
+
+Maybe separate release...
+- query endpoints
+
+Would introduce dep on RDF::Query, so separate release...
+- query store
+- query files/URIs
+- parse/explain SPARQL queries
+
+Another release...
+- generate RSA keys
+- sign RDF
+- verify RDF
+- encrypt RDF
+- decrypt RDF
+- sign/verify manifest
+
