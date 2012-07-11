@@ -118,6 +118,11 @@ sub output_tap_footer
 	my $n = $self->{tap_total} - $self->{tap_pass};
 	$n = 254 if $n > 254;
 	
+	if ($n)
+	{
+		print "# Summary: $self->{tap_pass} ok; $n not ok.\n";
+	}
+	
 	exit($n);
 }
 
