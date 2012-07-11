@@ -58,13 +58,14 @@ sub _build_parser
 
 sub parse_into_model
 {
-	my ($self, $model) = @_;
+	my ($self, $model, %args) = @_;
 
 	rdf_parse(
 		$self->handle,
 		as   => $self->parser,
 		base => $self->base,
 		into => $model,
+		%args,
 	)
 }
 

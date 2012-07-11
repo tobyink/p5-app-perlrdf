@@ -64,12 +64,12 @@ Output may be a URL (for HTTP POST), filename of STDOUT. If multiple
 outputs are specified, the entire graph is written to each of them.
 DESCRIPTION
 use constant opt_spec     => (
-	[ 'input|i=s',         'Input filename or URL' ],
+	[ 'input|i=s@',        'Input filename or URL' ],
 	[ 'input-spec|I=s@',   'Input file specification' ],
 	[ 'input-format|p=s',  'Input format (mnemonic: parse)' ], 
 	[ 'input-base|b=s',    'Input base URI' ],
 	[]=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>
-	[ 'output|o=s',        'Output filename or URL' ],
+	[ 'output|o=s@',       'Output filename or URL' ],
 	[ 'output-spec|O=s@',  'Output file specification' ],
 	[ 'output-format|s=s', 'Output format (mnemonic: serialise)' ],
 	[]=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>

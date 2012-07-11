@@ -5,6 +5,7 @@ More commands...
 - load store
 - dump store
 - truncate store (per-graph delete)
+- validate
 
 Maybe separate release...
 - query endpoints
