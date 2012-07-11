@@ -23,9 +23,9 @@ __END__
 
 App::perlrdf - perlrdf command line utils
 
-=head1 SYNOPSIS
-
 =head1 DESCRIPTION
+
+Support library for the L<perlrdf> command-line tool.
 
 =head1 BUGS
 
@@ -33,6 +33,8 @@ Please report any bugs to
 L<http://rt.cpan.org/Dist/Display.html?Queue=App-perlrdf>.
 
 =head1 SEE ALSO
+
+L<perlrdf>.
 
 =head1 AUTHOR
 
@@ -44,7 +46,6 @@ This software is copyright (c) 2012 by Toby Inkster.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
-
 
 =head1 DISCLAIMER OF WARRANTIES
 
