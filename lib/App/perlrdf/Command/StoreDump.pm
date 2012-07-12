@@ -40,8 +40,6 @@ sub execute
 	
 	my ($self, $opt, $arg) = @_;
 
-	$opt->{output_format} ||= 'NQuads';
-
 	my $store = $self->get_store($opt);
 	my $model = RDF::Trine::Model->new($store);
 
@@ -72,7 +70,7 @@ sub execute
 	push @outputs,
 		App::perlrdf::FileSpec::OutputRDF->new_from_filespec(
 			'-',
-			$opt->{output_format},
+			($opt->{output_format} // 'NQuads'),
 			$opt->{output_base},
 		)
 		unless @outputs;
