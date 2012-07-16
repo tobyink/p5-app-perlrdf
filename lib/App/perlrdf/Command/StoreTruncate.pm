@@ -18,6 +18,13 @@ use constant command_names => qw( store_truncate truncate );
 use constant description   => <<'INTRO' . __PACKAGE__->store_help . <<'DESCRIPTION';
 Delete data from an RDF::Trine::Store.
 INTRO
+
+Note that because multiple stores may share a database, the 'nuke' option
+does not currently drop the database; it just removes the table which holds
+RDF quads.
+
+When one or more graph URIs are specified, the 'nuke' option is ignored,
+and prompts are skipped.
 DESCRIPTION
 
 use constant opt_spec => (
@@ -58,9 +65,12 @@ sub execute
 			$model->remove_statements((undef)x4);
 		}
 		
-		if ($opt->{yes} or prompt_yn("Really nuke this store?"))
+		if ($opt->{nuke})
 		{
-			$store->nuke;
+			if ($opt->{yes} or prompt_yn("Really nuke this store?"))
+			{
+				$store->nuke;
+			}
 		}
 	}
 }

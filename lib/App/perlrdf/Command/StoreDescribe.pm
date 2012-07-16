@@ -1,4 +1,4 @@
-package App::perlrdf::Command::StoreDump;
+package App::perlrdf::Command::StoreDescribe;
 
 use 5.010;
 use strict;
@@ -6,17 +6,17 @@ use warnings;
 use utf8;
 
 BEGIN {
-	$App::perlrdf::Command::StoreDump::AUTHORITY = 'cpan:TOBYINK';
-	$App::perlrdf::Command::StoreDump::VERSION   = '0.001';
+	$App::perlrdf::Command::StoreDescribe::AUTHORITY = 'cpan:TOBYINK';
+	$App::perlrdf::Command::StoreDescribe::VERSION   = '0.001';
 }
 
 use App::perlrdf -command;
 use namespace::clean;
 
-use constant abstract      => q (Dump RDF data from an RDF::Trine::Store.);
-use constant command_names => qw( store_dump dump );
+use constant abstract      => q (Describe RDF resource using an RDF::Trine::Store.);
+use constant command_names => qw( store_describe desc );
 use constant description   => <<'INTRO' . __PACKAGE__->store_help . <<'DESCRIPTION';
-Dump data from an RDF::Trine::Store.
+Retrieve a bounded description from an RDF::Trine::Store.
 INTRO
 
 Output files are specified the same way as for the 'translate' command. See
@@ -29,8 +29,6 @@ use constant opt_spec => (
 	[ 'output|o=s@',       'Output filename or URL' ],
 	[ 'output-spec|O=s@',  'Output file specification' ],
 	[ 'output-format|s=s', 'Output format (mnemonic: serialise)' ],
-	[]=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>,
-	[ 'graph|g=s@',        'Graph(s) to dump (default: all graphs)' ],
 );
 
 sub execute
@@ -43,16 +41,9 @@ sub execute
 	my $store = $self->get_store($opt);
 	my $model = RDF::Trine::Model->new($store);
 
-	if ($opt->{graph})
-	{
-		my $orig = $model;
-		$model   = RDF::Trine::Model->new;
-		for (@{ $opt->{graph} })
-		{
-			my $graph = RDF::Trine::Node::Resource->new($_);
-			$model->add_iterator( scalar $orig->get_statements((undef)x3, $graph) );
-		}
-	}
+	my $resource = @$arg
+		? RDF::Trine::iri(shift @$arg)
+		: $self->usage_error("No resource to describe");
 
 	my @outputs = $self->get_filespecs(
 		'App::perlrdf::FileSpec::OutputRDF',
@@ -74,14 +65,17 @@ sub execute
 			$opt->{output_base},
 		)
 		unless @outputs;
-	
+
+	my $description = RDF::Trine::Model->new;
+	$description->add_iterator( $model->bounded_description($resource) );
+
 	for (@outputs)
 	{
 		printf STDERR "Writing %s\n", $_->uri;
 		
 		eval {
 			local $@ = undef;
-			$_->serialize_model($model);
+			$_->serialize_model($description);
 			1;
 		} or warn "$@\n";
 	}
