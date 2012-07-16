@@ -23,6 +23,7 @@ DESCRIPTION
 use constant opt_spec     => (
 	[ 'format|f=s' => 'Output format ("turtle", "xmlns", "sparql", "text")' ],
 );
+use constant usage_desc   => '%c prefix %o PREFIX [PREFIX ...]';
 
 sub execute
 {

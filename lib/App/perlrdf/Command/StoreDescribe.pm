@@ -30,6 +30,7 @@ use constant opt_spec => (
 	[ 'output-spec|O=s@',  'Output file specification' ],
 	[ 'output-format|s=s', 'Output format (mnemonic: serialise)' ],
 );
+use constant usage_desc   => '%c store_describe %o RESOURCE';
 
 sub execute
 {

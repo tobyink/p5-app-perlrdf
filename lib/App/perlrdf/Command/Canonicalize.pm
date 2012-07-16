@@ -41,6 +41,8 @@ use constant opt_spec      => (
 	[ 'on-fail|x=s',       'Behaviour when graphs cannot be canonicalized' ],	
 );
 
+use constant usage_desc    => '%c canonicalize %o INPUT [OUTPUT]';
+
 sub execute
 {
 	require App::perlrdf::FileSpec::InputRDF;

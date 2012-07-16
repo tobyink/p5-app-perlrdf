@@ -17,12 +17,13 @@ use namespace::clean;
 use constant abstract      => q (Determine if two graphs are isomorphic.);
 use constant command_names => qw( isomorphic );
 
-use constant opt_spec     => (
+use constant opt_spec      => (
 	[ 'input|i=s@',        'Input filename or URL' ],
 	[ 'input-spec|I=s@',   'Input file specification' ],
 	[ 'input-format|p=s',  'Input format (mnemonic: parse)' ], 
 	[ 'input-base|b=s',    'Input base URI' ],
 );
+use constant usage_desc    => '%c isomorphic %o INPUT1 INPUT2';
 
 sub execute
 {

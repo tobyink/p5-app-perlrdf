@@ -67,7 +67,8 @@ If you want to test FileSpecs, you can run:
 
     perlrdf filespec SPEC1 SPEC2 ...
 DESCRIPTION
-use constant opt_spec     => qw();
+use constant opt_spec      => qw();
+use constant usage_desc    => '%c filespec';
 
 sub execute
 {

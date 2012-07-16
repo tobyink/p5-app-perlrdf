@@ -18,7 +18,8 @@ use constant command_names => qw( make_store mkstore );
 use constant description   => <<'DESCRIPTION' . __PACKAGE__->store_help;
 Creates an empty RDF::Trine store.
 DESCRIPTION
-use constant opt_spec => ( __PACKAGE__->store_opt_spec );
+use constant opt_spec      => ( __PACKAGE__->store_opt_spec );
+use constant usage_desc    => '%c make_store %o';
 
 sub execute
 {

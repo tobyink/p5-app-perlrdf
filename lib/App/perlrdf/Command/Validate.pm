@@ -26,6 +26,7 @@ use constant opt_spec     => (
 	[ 'input-format|p=s',  'Input format (mnemonic: parse)' ], 
 	[ 'input-base|b=s',    'Input base URI' ],
 );
+use constant usage_desc   => '%c validate %o INPUT [INPUT ...]';
 
 sub execute
 {
