@@ -1,16 +1,3 @@
-Need some documentation!
-
-More commands...
-- describe
-
-Separate release...
-- query endpoints
-
-Would introduce dep on RDF::Query, so separate release...
-- query store
-- query files/URIs
-- parse/explain SPARQL queries
-
 Another release...
 - generate RSA keys
 - sign RDF
