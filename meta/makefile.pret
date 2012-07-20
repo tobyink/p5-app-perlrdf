@@ -9,8 +9,10 @@
 	requires          p`App::Cmd`;
 	requires          p`App::Cmd::Plugin::Prompt`;
 	requires          p`Data::UUID`;
+	requires          p`JSON 2.00`;
 	requires          p`LWP::UserAgent`;
 	requires          p`namespace::clean`;
+	requires          p`Object:AUTHORITY`;
 	requires          p`Path::Class`;
 	requires          p`PerlX::Maybe`;
 	requires          p`RDF::NS`;

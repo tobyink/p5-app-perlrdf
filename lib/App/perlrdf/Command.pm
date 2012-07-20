@@ -142,20 +142,24 @@ sub get_store
 				$d .= ";host=$host" if $host;
 				$d .= ";port=$port" if $port;
 			}
-			else
-			{
-				$self->usage_error("No SQLite, MySQL or Pg database specified.");
-			}
 			$d;
 		};
 	
-	no warnings;
-	return RDF::Trine::Store::DBI->new(
-		"$opt->{model}",
-		$dsn,
-		$opt->{username},
-		$opt->{password},
-	);
+	if (length $dsn)
+	{
+		no warnings;
+		return RDF::Trine::Store::DBI->new(
+			"$opt->{model}",
+			$dsn,
+			$opt->{username},
+			$opt->{password},
+		);
+	}
+	
+	return RDF::Trine::store($ENV{PERLRDF_STORE})
+		if defined $ENV{PERLRDF_STORE};
+	
+	$self->usage_error("No SQLite, MySQL or Pg database specified.");
 }
 
 1;

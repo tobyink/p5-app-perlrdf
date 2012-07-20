@@ -168,12 +168,6 @@ These configuration strings are passed to the App::perlrdf tool using the
    $ perlrdf make_store \
       --store="DBI;mymodel;DBI:mysql:database=rdf;user;password"
 
-As they are quite long and typo-prone, it may be worth keeping any stores you
-frequently interact with as environment variables, so that you can just
-type:
-
-   $ perlrdf make_store --store=$MYSTORE
-
 For the common case of DBI-backed stores, App::perlrdf offers the ability
 to avoid configuration strings and just specify database type, name, etc:
 
@@ -187,6 +181,12 @@ to avoid configuration strings and just specify database type, name, etc:
 SQLite-backed stores are particularly easy to work with:
 
    $ perlrdf make_store --sqlite=/tmp/mydatabase.sqlite
+
+If no store is specified on the command line, the C<PERLRDF_STORE>
+environment variable is consulted.
+
+	$ setenv PERLRDF_STORE "DBI;xyz;DBI:mysql:database=rdf;un;pw"
+   $ perlrdf make_store
 
 =head3 C<< perlrdf make_store >>
 

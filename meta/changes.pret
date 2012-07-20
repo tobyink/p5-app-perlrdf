@@ -2,5 +2,6 @@
 
 `App-perlrdf 0.001 cpan:TOBYINK`
 	issued  2012-07-22;
-	label   "Initial release: happy pi day!".
+	label   "Initial release: happy pi day!";
+	comment "22/7 is a closer approximation to pi than 3.14.".
 
