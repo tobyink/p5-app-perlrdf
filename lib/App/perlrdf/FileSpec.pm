@@ -100,38 +100,6 @@ sub _build_base
 	shift->uri;
 }
 
-sub _build_format
-{
-	my $self = shift;
-	
-	if (lc $self->uri->scheme eq 'file')
-	{
-		return 'RDF::TrineX::Parser::Pretdsl'
-			if $self->uri->file =~ /\.(pret|pretdsl)/i;
-		
-		return RDF::Trine::Parser
-			-> guess_parser_by_filename($self->uri->file);
-	}
-	
-	if ($self->can('response'))
-	{
-		return $self->response->content_type
-			if $self->response->content_type;
-		
-		return 'RDF::TrineX::Parser::Pretdsl'
-			if (($self->response->base // $self->uri) =~ /\.(pret|pretdsl)/i);
-			
-		return RDF::Trine::Parser->guess_parser_by_filename(
-			$self->response->base // $self->uri,
-		);
-	}
-
-	return 'RDF::TrineX::Parser::Pretdsl'
-		if $self->uri =~ /\.(pret|pretdsl)/i;
-
-	return RDF::Trine::Parser->guess_parser_by_filename($self->uri);
-}
-
 sub TO_JSON
 {
 	my ($self, $stringify) = @_;
