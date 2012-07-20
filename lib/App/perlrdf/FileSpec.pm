@@ -100,6 +100,12 @@ sub _build_base
 	shift->uri;
 }
 
+sub _build_format
+{
+	return $1 if shift->uri =~ /\.(\w+)$/;
+	return '';
+}
+
 sub TO_JSON
 {
 	my ($self, $stringify) = @_;
