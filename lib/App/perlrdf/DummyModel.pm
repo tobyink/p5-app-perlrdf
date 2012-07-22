@@ -1,5 +1,10 @@
 package App::perlrdf::DummyModel;
 
+BEGIN {
+	$App::perlrdf::DummyModel::AUTHORITY = 'cpan:TOBYINK';
+	$App::perlrdf::DummyModel::VERSION   = '0.001';
+}
+
 use strict qw(vars subs);
 no warnings;
 use base 'RDF::Trine::Model';
