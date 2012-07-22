@@ -46,7 +46,7 @@ sub _build_handle
 	}
 	else
 	{
-		die "TODO";
+		die sprintf("TODO - '%s' URIs are not supported for output yet", $uri->scheme);
 	}
 }
 
