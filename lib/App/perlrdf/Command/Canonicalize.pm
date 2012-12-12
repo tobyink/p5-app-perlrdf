@@ -7,7 +7,7 @@ use utf8;
 
 BEGIN {
 	$App::perlrdf::Command::Canonicalize::AUTHORITY = 'cpan:TOBYINK';
-	$App::perlrdf::Command::Canonicalize::VERSION   = '0.001';
+	$App::perlrdf::Command::Canonicalize::VERSION   = '0.002';
 }
 
 use App::perlrdf -command;

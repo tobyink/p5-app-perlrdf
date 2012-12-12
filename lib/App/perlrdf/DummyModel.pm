@@ -2,7 +2,7 @@ package App::perlrdf::DummyModel;
 
 BEGIN {
 	$App::perlrdf::DummyModel::AUTHORITY = 'cpan:TOBYINK';
-	$App::perlrdf::DummyModel::VERSION   = '0.001';
+	$App::perlrdf::DummyModel::VERSION   = '0.002';
 }
 
 use strict qw(vars subs);

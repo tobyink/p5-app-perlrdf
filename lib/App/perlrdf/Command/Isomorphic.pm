@@ -7,7 +7,7 @@ use utf8;
 
 BEGIN {
 	$App::perlrdf::Command::Isomorphic::AUTHORITY = 'cpan:TOBYINK';
-	$App::perlrdf::Command::Isomorphic::VERSION   = '0.001';
+	$App::perlrdf::Command::Isomorphic::VERSION   = '0.002';
 }
 
 use App::perlrdf -command;

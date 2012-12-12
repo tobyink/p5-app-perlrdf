@@ -7,7 +7,7 @@ use utf8;
 
 BEGIN {
 	$App::perlrdf::AUTHORITY = 'cpan:TOBYINK';
-	$App::perlrdf::VERSION   = '0.001';
+	$App::perlrdf::VERSION   = '0.002';
 }
 
 use App::Cmd::Setup -app => {

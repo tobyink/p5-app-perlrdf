@@ -11,6 +11,7 @@
 	requires          p`App::Cmd`;
 	requires          p`App::Cmd::Plugin::Prompt`;
 	requires          p`Data::UUID`;
+	requires          p`IO::Scalar`;
 	requires          p`JSON 2.00`;
 	requires          p`LWP::UserAgent`;
 	requires          p`namespace::clean`;

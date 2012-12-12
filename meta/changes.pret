@@ -5,3 +5,10 @@
 	label   "Initial release: happy pi day!";
 	comment "22/7 is a closer approximation to pi than 3.14.".
 
+`App-perlrdf 0.002 cpan:TOBYINK`
+	issued  2012-12-12;
+	label   "Day of the Dozens!";
+	changeset [
+		item "Add IO::Scalar dependency."^^Packaging;
+	].
+
