@@ -12,3 +12,8 @@
 		item "Add IO::Scalar dependency."^^Packaging;
 	].
 
+`App-perlrdf 0.003 cpan:TOBYINK`
+	changeset [
+		item "Switch from Any::Moose to Moose."^^Update;
+	].
+
