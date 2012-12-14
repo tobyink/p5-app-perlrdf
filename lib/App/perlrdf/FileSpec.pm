@@ -11,8 +11,8 @@ BEGIN {
 	$App::perlrdf::FileSpec::VERSION   = '0.002';
 }
 
-use Any::Moose;
-use Any::Moose '::Util::TypeConstraints';
+use Moose;
+use Moose::Util::TypeConstraints;
 use JSON;
 use Object::AUTHORITY;
 use PerlX::Maybe;

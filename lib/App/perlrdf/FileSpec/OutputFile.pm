@@ -11,7 +11,7 @@ BEGIN {
 	$App::perlrdf::FileSpec::OutputFile::VERSION   = '0.002';
 }
 
-use Any::Moose;
+use Moose;
 use LWP::UserAgent;
 use Path::Class;
 use namespace::clean;

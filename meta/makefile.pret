@@ -7,7 +7,7 @@
 	test_requires     p`Test::More 0.61`;
 	test_requires     p`Test::Exception`;
 	test_requires     p`Test::RDF 1.00`;
-	requires          p`Any::Moose`;
+	requires          p`Moose`;
 	requires          p`App::Cmd`;
 	requires          p`App::Cmd::Plugin::Prompt`;
 	requires          p`Data::UUID`;

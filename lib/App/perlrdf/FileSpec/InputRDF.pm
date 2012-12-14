@@ -11,7 +11,7 @@ BEGIN {
 	$App::perlrdf::FileSpec::InputRDF::VERSION   = '0.002';
 }
 
-use Any::Moose;
+use Moose;
 use RDF::Trine;
 use RDF::TriN3;
 use RDF::TrineX::Parser::Pretdsl;

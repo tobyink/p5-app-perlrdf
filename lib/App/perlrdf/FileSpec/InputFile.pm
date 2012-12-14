@@ -11,7 +11,7 @@ BEGIN {
 	$App::perlrdf::FileSpec::InputFile::VERSION   = '0.002';
 }
 
-use Any::Moose;
+use Moose;
 use IO::Scalar;
 use Path::Class;
 use namespace::clean;
