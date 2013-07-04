@@ -18,3 +18,10 @@
 		item "Switch from Any::Moose to Moose."^^Update;
 	].
 
+`App-perlrdf 0.004 cpan:TOBYINK`
+	issued  2013-07-04;
+	changeset [
+		item "Eliminate smartmatch/given/when (except in one module where it will continue to be used for a short time)."^^Update;
+		item "Dropped the `-p` shorthand for the `--password` option because it conflicts with another shorthand."^^Removal;
+	].
+
