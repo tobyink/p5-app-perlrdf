@@ -32,12 +32,12 @@ sub execute
 	my ($self, $opt, $arg) = @_;
 	
 	my $method;
-	given ($opt->{format} // '')
+	for ($opt->{format} // '')
 	{
-		when (/turtle|ttl/i)    { $method = 'TTL' }
-		when (/sparql/i)        { $method = 'SPARQL' }
-		when (/xmlns|xml/i)     { $method = 'XMLNS' }
-		default                 { $method = 'TXT' }
+		if    (/turtle|ttl/i) { $method = 'TTL' }
+		elsif (/sparql/i)     { $method = 'SPARQL' }
+		elsif (/xmlns|xml/i)  { $method = 'XMLNS' }
+		else                  { $method = 'TXT' }
 	}
 	
 	say for RDF::NS->new('any')->$method(join q<,>, @$arg);

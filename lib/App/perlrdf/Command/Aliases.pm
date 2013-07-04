@@ -45,6 +45,11 @@ sub opt_spec
 
 sub execute
 {
+	# XXX - ultimately this should move to match::simple, but
+	# I'll wait until that's packaged for Debian. (Hello, Jonas!)
+	# 
+	no if $] >= 5.017011, warnings => 'experimental::smartmatch';
+	
 	my ($self, $opt, $args) = @_;
 	
 	my $filter = scalar(@$args)
