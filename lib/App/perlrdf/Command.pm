@@ -19,7 +19,7 @@ use constant store_opt_spec => (
 	[ 'host|h=s'          => 'Database server host name or IP address' ],
 	[ 'port=i'            => 'Database server port' ],
 	[ 'username|u=s'      => 'User name for database login' ],
-	[ 'password|p=s'      => 'Password for database login' ],
+	[ 'password=s'        => 'Password for database login' ],
 	[]=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>,
 	[ 'dbi|D=s'           => 'DBI DSN' ],
 	[ 'sqlite|Q=s'        => 'SQLite file name' ],
