@@ -26,4 +26,6 @@
 	requires          p`RDF::TrineX::Parser::RDFa`;
 	requires          p`URI`;
 	requires          p`URI::file`;
+	recommends        p`App::perlrdf::Command::Query`;
+	recommends        p`App::perlrdf::Command::Void`;
 	.
