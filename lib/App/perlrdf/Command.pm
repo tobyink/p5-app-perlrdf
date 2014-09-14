@@ -11,7 +11,6 @@ BEGIN {
 }
 
 use App::Cmd::Setup -command;
-use Object::AUTHORITY;
 
 use constant store_opt_spec => (
 	[ 'database|t=s'      => '"sqlite", "mysql" or "pg"' ],
@@ -160,6 +159,13 @@ sub get_store
 		if defined $ENV{PERLRDF_STORE};
 	
 	$self->usage_error("No SQLite, MySQL or Pg database specified.");
+}
+
+sub AUTHORITY
+{
+	my $class = ref($_[0]) || $_[0];
+	no strict qw(refs);
+	${"$class\::AUTHORITY"};
 }
 
 1;

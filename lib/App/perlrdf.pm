@@ -13,7 +13,13 @@ BEGIN {
 use App::Cmd::Setup -app => {
 	plugins => [qw( Prompt )],
 };
-use Object::AUTHORITY;
+
+sub AUTHORITY
+{
+	my $class = ref($_[0]) || $_[0];
+	no strict qw(refs);
+	${"$class\::AUTHORITY"};
+}
 
 1;
 
