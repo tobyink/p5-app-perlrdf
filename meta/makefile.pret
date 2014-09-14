@@ -1,0 +1,35 @@
+@prefix deps:  <http://ontologi.es/doap-deps#> .
+
+<http://purl.org/NET/cpan-uri/dist/App-perlrdf/project>
+	deps:runtime-recommendation      [
+		deps:on "App::perlrdf::Command::Query"^^deps:CpanId;
+	];
+	deps:runtime-recommendation      [
+		deps:on "App::perlrdf::Command::Void"^^deps:CpanId;
+	];
+	deps:runtime-requirement         [ deps:on "App::Cmd"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "App::Cmd::Plugin::Prompt"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "Data::UUID"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "IO::Scalar"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "JSON 2.00"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "LWP::UserAgent"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "namespace::clean"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "Path::Class"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "PerlX::Maybe"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "RDF::NS"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "RDF::TriN3"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "RDF::Trine"^^deps:CpanId ];
+	deps:runtime-requirement         [
+		deps:on "RDF::TrineX::Functions 0.004"^^deps:CpanId;
+	];
+	deps:runtime-requirement         [
+		deps:on "RDF::TrineX::Parser::Pretdsl"^^deps:CpanId;
+	];
+	deps:runtime-requirement         [ deps:on "RDF::TrineX::Parser::RDFa"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "URI"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "URI::file"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "Moose"^^deps:CpanId ];
+	deps:test-requirement            [ deps:on "Test::More 0.61"^^deps:CpanId ];
+	deps:test-requirement            [ deps:on "Test::Exception"^^deps:CpanId ];
+	deps:test-requirement            [ deps:on "Test::RDF 1.00"^^deps:CpanId ].
+
