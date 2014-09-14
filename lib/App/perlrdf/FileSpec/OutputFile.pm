@@ -8,7 +8,7 @@ use utf8;
 
 BEGIN {
 	$App::perlrdf::FileSpec::OutputFile::AUTHORITY = 'cpan:TOBYINK';
-	$App::perlrdf::FileSpec::OutputFile::VERSION   = '0.004';
+	$App::perlrdf::FileSpec::OutputFile::VERSION   = '0.005';
 }
 
 use Moose;

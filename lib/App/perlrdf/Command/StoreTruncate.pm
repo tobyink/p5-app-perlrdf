@@ -7,7 +7,7 @@ use utf8;
 
 BEGIN {
 	$App::perlrdf::Command::StoreTruncate::AUTHORITY = 'cpan:TOBYINK';
-	$App::perlrdf::Command::StoreTruncate::VERSION   = '0.004';
+	$App::perlrdf::Command::StoreTruncate::VERSION   = '0.005';
 }
 
 use App::perlrdf -command;

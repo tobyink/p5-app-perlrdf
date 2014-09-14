@@ -25,3 +25,10 @@
 		item "Dropped the `-p` shorthand for the `--password` option because it conflicts with another shorthand."^^Removal;
 	].
 
+
+`App-perlrdf 0.005 cpan:TOBYINK`
+	issued    2014-09-14;
+	changeset [
+		item "Switch to Dist::Inkt."^^Packaging;
+	].
+

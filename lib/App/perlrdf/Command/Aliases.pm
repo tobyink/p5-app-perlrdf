@@ -7,7 +7,7 @@ use utf8;
 
 BEGIN {
 	$App::perlrdf::Command::Aliases::AUTHORITY = 'cpan:TOBYINK';
-	$App::perlrdf::Command::Aliases::VERSION   = '0.004';
+	$App::perlrdf::Command::Aliases::VERSION   = '0.005';
 }
 
 use App::perlrdf -command;
