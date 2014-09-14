@@ -13,6 +13,7 @@
 	deps:runtime-requirement         [ deps:on "IO::Scalar"^^deps:CpanId ];
 	deps:runtime-requirement         [ deps:on "JSON 2.00"^^deps:CpanId ];
 	deps:runtime-requirement         [ deps:on "LWP::UserAgent"^^deps:CpanId ];
+	deps:runtime-requirement         [ deps:on "match::simple"^^deps:CpanId ];
 	deps:runtime-requirement         [ deps:on "namespace::clean"^^deps:CpanId ];
 	deps:runtime-requirement         [ deps:on "Path::Class"^^deps:CpanId ];
 	deps:runtime-requirement         [ deps:on "PerlX::Maybe"^^deps:CpanId ];

@@ -29,6 +29,8 @@
 `App-perlrdf 0.005 cpan:TOBYINK`
 	issued    2014-09-14;
 	changeset [
+		item "No longer require Object::AUTHORITY."^^Change;
+		item "Drop final usage of smartmatch in favour of match::simple."^^Change;
 		item "Switch to Dist::Inkt."^^Packaging;
 	].
 
