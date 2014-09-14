@@ -56,7 +56,7 @@ sub execute
 	{
 		my ($preferred, @aliases) = $cmd->command_names;
 		printf("%-16s: %s\n", $preferred, "@aliases")
-			if $preferred ~~ $filter;
+			if match($preferred, $filter);
 	}
 }
 
