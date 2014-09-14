@@ -27,7 +27,7 @@ __END__
 
 =pod
 
-=encoding
+=encoding utf8
 
 =begin trustme
 
